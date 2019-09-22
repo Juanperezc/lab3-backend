@@ -23,3 +23,10 @@ Route.get('/', () => {
 Route.get('/hola', () => {
   return { greeting: 'Hello' }
 })
+
+Route
+  .group(() => {
+    Route.post('auth/register', 'AuthController.register').validator('StoreUser')
+    Route.post('auth/login', 'AuthController.login').validator('LoginUser')
+  })
+  .prefix('api')

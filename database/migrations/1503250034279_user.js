@@ -7,6 +7,7 @@ class UserSchema extends Schema {
   up () {
     this.collection('users', (collection) => {
       collection.index('email_index', {email: 1}, {unique: true})
+      collection.index('alias_index', {alias: 1}, {unique: true})
     })
   }
 
