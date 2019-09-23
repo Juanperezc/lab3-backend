@@ -31,6 +31,9 @@ Route
 
 
     //* LocationsRoute
-    Route.resource('locations', 'LocationController')
+    Route.resource('location', 'LocationController')
+
+    //* LocationsRoute
+    Route.resource('user', 'UserController')
   })
   .prefix('api')
