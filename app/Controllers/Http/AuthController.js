@@ -3,6 +3,7 @@ const User = use('App/Models/User');
 class AuthController {
 
     async register({request, auth, response}) {
+
         const alias = request.input("alias")
         const full_name = request.input("full_name")
         const date_birth = request.input("date_birth")
@@ -37,7 +38,7 @@ async login({request, auth, response}) {
       if (await auth.attempt(email, password)) {
         let user = await User.findBy('email', email)
         let accessToken = await auth.generate(user)
-        return response.json({"user":user, "access_token": accessToken})
+        return response.json({"user" : user, "access_token": accessToken})
       }
 
     }

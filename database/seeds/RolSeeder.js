@@ -11,10 +11,10 @@
 */
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
-const Factory = use('Factory')
+
 const Rol = use('App/Models/Rol')
 class RolSeeder {
-  async run () {
+  static async run () {
     await Rol.create({ name: 'admin',
      });
     await Rol.create({ name: 'user',

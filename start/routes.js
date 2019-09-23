@@ -28,5 +28,9 @@ Route
   .group(() => {
     Route.post('auth/register', 'AuthController.register').validator('StoreUser')
     Route.post('auth/login', 'AuthController.login').validator('LoginUser')
+
+
+    //* LocationsRoute
+    Route.resource('locations', 'LocationController')
   })
   .prefix('api')

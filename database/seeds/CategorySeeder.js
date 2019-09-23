@@ -14,7 +14,7 @@ const Category = use('App/Models/Category')
 const Factory = use('Factory')
 
 class CategorySeeder {
-  async run () {
+  static async  run () {
     await Category.create({
       name: 'sports'
     })

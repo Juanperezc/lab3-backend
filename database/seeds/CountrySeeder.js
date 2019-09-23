@@ -15,7 +15,7 @@ const Country = use('App/Models/Country')
 const Factory = use('Factory')
 
 class CountrySeeder {
-  async run () {
+  static async run () {
     let citiesV = [
       {
         name: "Barquisimeto"

@@ -16,7 +16,7 @@ const moment = require('moment')
 const User = use('App/Models/User')
 
 class UserSeeder {
-  async run () {
+  static async run () {
     await User.create({ email: 'juanl1996@hotmail.com',
     full_name :  'Juan Perez',
     date_birth : '',

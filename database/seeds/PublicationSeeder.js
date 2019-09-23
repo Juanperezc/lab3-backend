@@ -14,10 +14,15 @@
 const Factory = use('Factory')
 const Publication = use('App/Models/Publication')
 const moment = require('moment')
+const User = use('App/Models/User')
+
 class PublicationSeeder {
-  async run () {
+  static async run () {
     //* shared_id es un campo que puede o no existir
-    const publication = await Publication.create({ user_alias: 'juanperezc',
+    const user = await User.findBy('alias', 'juanperezc')
+
+    const publication = await Publication.create({ 
+    user_id: user._id,
     type: 'multimedia/post',
     body: 'Vendo guante blablabla',
     category: 'sports',

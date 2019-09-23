@@ -10,6 +10,7 @@ class User extends Model {
   static get hidden () {
     return ['password']
   }
+  
   static boot () {
     super.boot()
 
@@ -36,6 +37,11 @@ class User extends Model {
    */
   tokens () {
     return this.hasMany('App/Models/Token')
+  }
+  publications () {
+    return this.hasMany('App/Models/Publication', '_id', 'user_id')
+ //  return this.hasMany('App/Model/Publication', '_id', 'user_id')
+   // return this.hasMany('App/Model/Publication')
   }
   
 }
