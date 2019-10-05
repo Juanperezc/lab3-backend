@@ -17,7 +17,7 @@
 const Route = use('Route')
 
 Route.get('/', () => {
-  return { greeting: 'Hello world in JSON, test2' }
+  return { greeting: 'Hello world in JSON, test3' }
 })
 
 Route.get('/hola', () => {
