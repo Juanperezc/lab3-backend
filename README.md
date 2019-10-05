@@ -7,7 +7,7 @@ This is the boilerplate for creating an API server in AdonisJs, it comes pre-con
 3. CORS
 4. Lucid ORM
 5. Migrations and seeds
-6. Cambios test file
+6. Cambios test filess
 ## Setup
 
 Use the adonis command to install the blueprint
