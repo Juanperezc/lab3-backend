@@ -39,11 +39,13 @@ async login({request, auth, response}) {
         let user = await User.findBy('email', email)
         let accessToken = await auth.generate(user)
         return response.json({"user" : user, "access_token": accessToken})
+      }else{
+      
       }
 
     }
     catch (e) {
-      return response.json({message: 'You first need to register!'})
+      response.status(401).json({message: 'Invalid Credentials'})
     }
 }
 }
