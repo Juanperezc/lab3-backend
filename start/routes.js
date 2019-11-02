@@ -29,11 +29,16 @@ Route
     Route.post('auth/register', 'AuthController.register').validator('StoreUser')
     Route.post('auth/login', 'AuthController.login').validator('LoginUser')
 
-
-    //* LocationsRoute
+    //* LocationRoutes
     Route.resource('location', 'LocationController')
 
-    //* LocationsRoute
+    //* UserRoutes
     Route.resource('user', 'UserController')
+
+    //* PublicationRoutes
+    Route.resource('publication', 'PublicationController')
+
+    //* CategoryRoutes
+    Route.resource('category', 'CategoryController')
   })
   .prefix('api')
