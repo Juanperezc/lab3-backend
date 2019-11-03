@@ -17,7 +17,7 @@ class UserController {
             const user_model = await User.find(user._id).with('publications')
             return response.json({"user": user_model})
           } catch (error) {
-            response.status(401).json('Missing or invalid jwt')
+            response.status(500).json('error', error);
           }
 
     }
