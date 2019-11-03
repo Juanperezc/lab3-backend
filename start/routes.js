@@ -30,15 +30,19 @@ Route
     Route.post('auth/login', 'AuthController.login').validator('LoginUser')
 
     //* LocationRoutes
-    Route.resource('location', 'LocationController')
+    Route.resource('locations', 'LocationController')
 
     //* UserRoutes
-    Route.resource('user', 'UserController')
+
+    Route.resource('users', 'UserController').apiOnly().only(['index', 'show']).middleware(['auth'])
+    Route
+    .get('user/me', 'UserController.me').as('user.me')
+    .middleware('auth')
 
     //* PublicationRoutes
-    Route.resource('publication', 'PublicationController')
+    Route.resource('publications', 'PublicationController')
 
     //* CategoryRoutes
-    Route.resource('category', 'CategoryController')
+    Route.resource('categorys', 'CategoryController')
   })
   .prefix('api')
