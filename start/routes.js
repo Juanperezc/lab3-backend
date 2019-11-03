@@ -29,11 +29,20 @@ Route
     Route.post('auth/register', 'AuthController.register').validator('StoreUser')
     Route.post('auth/login', 'AuthController.login').validator('LoginUser')
 
+    //* LocationRoutes
+    Route.resource('locations', 'LocationController')
 
-    //* LocationsRoute
-    Route.resource('location', 'LocationController')
+    //* UserRoutes
 
-    //* LocationsRoute
-    Route.resource('user', 'UserController')
+    Route.resource('users', 'UserController').apiOnly().only(['index', 'show']).middleware(['auth'])
+    Route
+    .get('user/me', 'UserController.me').as('user.me')
+    .middleware('auth')
+
+    //* PublicationRoutes
+    Route.resource('publications', 'PublicationController')
+
+    //* CategoryRoutes
+    Route.resource('categorys', 'CategoryController')
   })
   .prefix('api')
