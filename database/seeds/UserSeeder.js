@@ -20,9 +20,9 @@ class UserSeeder {
     await User.create({
       email: 'juanl1996@hotmail.com',
       full_name: 'Juan Perez',
-      date_birth: '',
+      photo: 'https://www.gravatar.com/avatar/8d4218aacd5bfd3e72642de292a89c68',
+      birth_date: '',
       phone: '04245869872',
-      profile_pic: 'test',
       password: '2514182657',
       city: 'Barquisimeto',
       alias: 'juanperezc',
@@ -54,15 +54,19 @@ class UserSeeder {
         created_at: moment().toDate(),
         updated_at: moment().toDate(),
       }
-      ]
+      ],
+      following: [{
+        user_alias: 'marcosaenz',
+        created_at: moment().toDate(),
+        updated_at: moment().toDate(),
+      }]
     });
     await User.create({
-      email: 'test@test.com'
-      ,
+      email: 'test@test.com',
       full_name: 'Marco Saenz',
-      date_birth: '',
+      photo: null,
+      birth_date: null,
       phone: '04245774672',
-      profile_pic: 'test1',
       password: '1234567890',
       city: 'Cabudare',
       alias: 'marcosaenz',
@@ -94,8 +98,20 @@ class UserSeeder {
         created_at: moment().toDate(),
         updated_at: moment().toDate(),
       }
+      ],
+      following: [
+        {
+          user_alias: 'juanperezc',
+          created_at: moment().toDate(),
+          updated_at: moment().toDate(),
+        }
       ]
     });
+
+
+    const user = await Factory
+    .model('App/Models/User')
+    .createMany(50)
   }
 }
 
