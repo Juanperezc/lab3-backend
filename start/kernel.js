@@ -14,6 +14,7 @@ const Server = use('Server')
 */
 const globalMiddleware = [
   'Adonis/Middleware/BodyParser',
+  'App/Http/Middleware/Cors',
   'App/Middleware/ConvertEmptyStringsToNull'
 ]
 
