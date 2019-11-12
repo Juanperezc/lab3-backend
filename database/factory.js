@@ -13,13 +13,17 @@
 
 /** @type {import('@adonisjs/lucid/src/Factory')} */
 const Factory = use('Factory')
+const moment = require('moment')
+const gravatarUrl = require('gravatar-url');
+const coolImages = require("cool-images");
+var faker_node = require('faker');
 
 Factory.blueprint('App/Models/User', async (faker) => {
     return {
       email: faker.email(),
       full_name: faker.name(),
       password: faker.password(),
-      photo: faker.avatar({protocol: 'https', email: faker.email()}),
+      photo: faker_node.image.avatar(),
       birth_date: faker.birthday({string: true, american: false}),
       phone: faker.phone({ country: "us" }),
       city: faker.city(),
@@ -29,5 +33,23 @@ Factory.blueprint('App/Models/User', async (faker) => {
       notifications: [],
       followers: [],
       following: []
+    }
+  })
+
+  Factory.blueprint('App/Models/Publication', (faker) => {
+    return {
+      type: 'multimedia/post',
+      title: faker.sentence(),
+      body: faker.paragraph(),
+      photo : coolImages.one(600, 800)/*  */,
+      category: 'sports',
+      commentaries: [
+     
+      ],
+      likes:[
+     
+      ],
+      created_at : moment().toDate(),
+      updated_at: moment().toDate(),
     }
   })
