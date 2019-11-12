@@ -17,7 +17,7 @@ const User = use('App/Models/User')
 
 class UserSeeder {
   static async run() {
-    await User.create({
+    const user_juan = await User.create({
       email: 'juanl1996@hotmail.com',
       full_name: 'Juan Perez',
       photo: 'https://www.gravatar.com/avatar/8d4218aacd5bfd3e72642de292a89c68',
@@ -61,7 +61,11 @@ class UserSeeder {
         updated_at: moment().toDate(),
       }]
     });
-    await User.create({
+
+    const publications_juan = await Factory.model('App/Models/Publication').makeMany(5)
+    await user_juan.publications().saveMany(publications_juan)
+
+    const user_marco = await User.create({
       email: 'test@test.com',
       full_name: 'Marco Saenz',
       photo: null,
@@ -107,11 +111,13 @@ class UserSeeder {
         }
       ]
     });
-
+    const publications_marco = await Factory.model('App/Models/Publication').makeMany(5)
+    await user_marco.publications().saveMany(publications_marco)
 
     const user = await Factory
     .model('App/Models/User')
-    .createMany(50)
+    .createMany(10)
+
   }
 }
 

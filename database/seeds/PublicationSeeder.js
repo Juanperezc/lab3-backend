@@ -25,8 +25,9 @@ class PublicationSeeder {
     user_id: user._id,
     type: 'multimedia/post',
     body: 'Vendo guante blablabla',
+    photo : null,
     category: 'sports',
-    comentaries: [
+    commentaries: [
       {
         body: '100 verdes',
         likes:[{
@@ -47,9 +48,10 @@ class PublicationSeeder {
     ]});
     await Publication.create({ user_alias: 'juanperezc',
     type: 'multimedia/post',
+    photo : null,
     body: 'Vendo guante blablabla',
     category: 'sports',
-    comentaries: [
+    commentaries: [
       
     ],
     likes:[
