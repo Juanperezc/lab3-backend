@@ -41,13 +41,11 @@ Factory.blueprint('App/Models/User', async (faker) => {
       type: 'multimedia/post',
       title: faker.sentence(),
       body: faker.paragraph(),
-      photo : coolImages.one(600, 800)/*  */,
+      photo : faker_node.image.business(640, 480,true),/*  */
       category: 'sports',
       commentaries: [
-     
       ],
       likes:[
-     
       ],
       created_at : moment().toDate(),
       updated_at: moment().toDate(),

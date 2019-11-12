@@ -14,13 +14,13 @@
 const Factory = use('Factory')
 const moment = require('moment')
 const User = use('App/Models/User')
-
+var faker_node = require('faker');
 class UserSeeder {
   static async run() {
     const user_juan = await User.create({
       email: 'juanl1996@hotmail.com',
       full_name: 'Juan Perez',
-      photo: 'https://www.gravatar.com/avatar/8d4218aacd5bfd3e72642de292a89c68',
+      photo: faker_node.image.avatar(),
       birth_date: '',
       phone: '04245869872',
       password: '2514182657',
@@ -68,7 +68,7 @@ class UserSeeder {
     const user_marco = await User.create({
       email: 'test@test.com',
       full_name: 'Marco Saenz',
-      photo: null,
+      photo: faker_node.image.avatar(),
       birth_date: null,
       phone: '04245774672',
       password: '1234567890',

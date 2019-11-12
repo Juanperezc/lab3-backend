@@ -19,7 +19,7 @@ const User = use('App/Models/User')
 class PublicationSeeder {
   static async run () {
     //* shared_id es un campo que puede o no existir
-    const user = await User.findBy('alias', 'juanperezc')
+   /*  const user = await User.findBy('alias', 'juanperezc')
 
     const publication = await Publication.create({ 
     user_id: user._id,
@@ -57,7 +57,7 @@ class PublicationSeeder {
     likes:[
      
     ],
-   shared_id: publication._id});
+   shared_id: publication._id}); */
   }
 }
 
