@@ -14,15 +14,15 @@
 const Factory = use('Factory')
 const moment = require('moment')
 const User = use('App/Models/User')
-
+var faker_node = require('faker');
 class UserSeeder {
   static async run() {
-    await User.create({
+    const user_juan = await User.create({
       email: 'juanl1996@hotmail.com',
       full_name: 'Juan Perez',
-      date_birth: '',
+      photo: faker_node.image.avatar(),
+      birth_date: '',
       phone: '04245869872',
-      profile_pic: 'test',
       password: '2514182657',
       city: 'Barquisimeto',
       alias: 'juanperezc',
@@ -54,15 +54,23 @@ class UserSeeder {
         created_at: moment().toDate(),
         updated_at: moment().toDate(),
       }
-      ]
+      ],
+      following: [{
+        user_alias: 'marcosaenz',
+        created_at: moment().toDate(),
+        updated_at: moment().toDate(),
+      }]
     });
-    await User.create({
-      email: 'test@test.com'
-      ,
+
+    const publications_juan = await Factory.model('App/Models/Publication').makeMany(5)
+    await user_juan.publications().saveMany(publications_juan)
+
+    const user_marco = await User.create({
+      email: 'test@test.com',
       full_name: 'Marco Saenz',
-      date_birth: '',
+      photo: faker_node.image.avatar(),
+      birth_date: null,
       phone: '04245774672',
-      profile_pic: 'test1',
       password: '1234567890',
       city: 'Cabudare',
       alias: 'marcosaenz',
@@ -94,8 +102,22 @@ class UserSeeder {
         created_at: moment().toDate(),
         updated_at: moment().toDate(),
       }
+      ],
+      following: [
+        {
+          user_alias: 'juanperezc',
+          created_at: moment().toDate(),
+          updated_at: moment().toDate(),
+        }
       ]
     });
+    const publications_marco = await Factory.model('App/Models/Publication').makeMany(5)
+    await user_marco.publications().saveMany(publications_marco)
+
+    const user = await Factory
+    .model('App/Models/User')
+    .createMany(10)
+
   }
 }
 

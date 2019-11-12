@@ -10,7 +10,9 @@ class User extends Model {
   static get hidden () {
     return ['password']
   }
-  
+  static get visible () {
+    return ['_id', 'email','full_name','photo','birth_date','phone','city','alias','rol', 'followers', 'following']
+  }
   static boot () {
     super.boot()
 

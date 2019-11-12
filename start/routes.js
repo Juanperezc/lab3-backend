@@ -34,10 +34,18 @@ Route
 
     //* UserRoutes
 
-    Route.resource('users', 'UserController').apiOnly().only(['index', 'show']).middleware(['auth'])
+    Route.resource('users', 'UserController').
+    validator(new Map([
+      ['users.update', 'UpdateUser']
+    ]))
+    .apiOnly().only(['index', 'show', 'update']).middleware(['auth'])
     Route
     .get('user/me', 'UserController.me').as('user.me')
     .middleware('auth')
+    Route
+    .post('user/upload_photo', 'UserController.upload_photo').as('user.upload_photo')
+    .middleware('auth')
+
 
     //* PublicationRoutes
     Route.resource('publications', 'PublicationController')
@@ -46,3 +54,11 @@ Route
     Route.resource('categorys', 'CategoryController')
   })
   .prefix('api')
+  Route
+  .group(() => {
+
+    Route
+    .get('user/me', 'UserController.me').as('user.me')
+    .middleware('auth')
+
+  }).prefix('files')
