@@ -5,10 +5,10 @@ const Model = use('Model')
 
 class Category extends Model {
     static get table () {
-        return 'categorys'
+        return 'categories'
       }
       static get collection () {
-        return 'categorys'
+        return 'categories'
       }
 }
 
