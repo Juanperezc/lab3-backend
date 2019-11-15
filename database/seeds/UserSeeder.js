@@ -15,6 +15,7 @@ const Factory = use('Factory')
 const moment = require('moment')
 const User = use('App/Models/User')
 var faker_node = require('faker');
+
 class UserSeeder {
   static async run() {
     const user_juan = await User.create({
@@ -114,11 +115,47 @@ class UserSeeder {
     const publications_marco = await Factory.model('App/Models/Publication').makeMany(5)
     await user_marco.publications().saveMany(publications_marco)
 
+     const user_leon = await User.create({
+      email: 'leon@test.com',
+      full_name: 'Luis Leon',
+      photo: faker_node.image.avatar(),
+      birth_date: '',
+      phone: '04245869872',
+      password: '12345',
+      city: 'Barquisimeto',
+      alias: 'leon23',
+      rol: 'admin',
+      threads: [
+      ],
+      notifications: [
+        {
+          type: 'Request',
+          content: 'data',
+          read_at: null,
+          created_at: moment().toDate(),
+          updated_at: moment().toDate(),
+        }
+      ],
+      followers: [{
+        user_alias: 'marcosaenz',
+        created_at: moment().toDate(),
+        updated_at: moment().toDate(),
+      }
+      ],
+      following: [{
+        user_alias: 'marcosaenz',
+        created_at: moment().toDate(),
+        updated_at: moment().toDate(),
+      }]
+    });
+
+    const publications_leon = await Factory.model('App/Models/Publication').makeMany(5)
+    await user_leon.publications().saveMany(publications_leon)
+
     const user = await Factory
     .model('App/Models/User')
     .createMany(10)
 
   }
 }
-
 module.exports = UserSeeder

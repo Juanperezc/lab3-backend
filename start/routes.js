@@ -21,8 +21,10 @@ Route.get('/', () => {
 })
 
 Route.get('/hola', () => {
-  return { greeting: 'Hello' }
-})
+  return { greeting: 'Hello' } })
+
+Route.resource('categorys', 'CategoryController')
+
 
 Route
   .group(() => {
@@ -39,9 +41,11 @@ Route
       ['users.update', 'UpdateUser']
     ]))
     .apiOnly().only(['index', 'show', 'update']).middleware(['auth'])
+   
     Route
     .get('user/me', 'UserController.me').as('user.me')
     .middleware('auth')
+    
     Route
     .post('user/upload_photo', 'UserController.upload_photo').as('user.upload_photo')
     .middleware('auth')
@@ -51,9 +55,12 @@ Route
     Route.resource('publications', 'PublicationController')
 
     //* CategoryRoutes
-    Route.resource('categorys', 'CategoryController')
+    //Route.resource('categorys', 'CategoryController')
+
+  
   })
   .prefix('api')
+
   Route
   .group(() => {
 

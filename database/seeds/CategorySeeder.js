@@ -15,8 +15,30 @@ const Factory = use('Factory')
 
 class CategorySeeder {
   static async  run () {
+    
     await Category.create({
-      name: 'sports'
+      name: 'Alimentos',
+      status: 'A'
+    });
+
+    await Category.create({
+      name: 'Ropa',
+      status: 'A'
+    })
+    
+    await Category.create({
+      name: 'Zapatos',
+      status: 'A'
+    })
+    
+    await Category.create({
+      name: 'Medicina',
+      status: 'A'
+    })
+    
+    await Category.create({
+      name: 'Auto partes',
+      status: 'A'
     })
   }
 }

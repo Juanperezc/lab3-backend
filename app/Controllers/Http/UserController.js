@@ -2,6 +2,7 @@
 const User = use('App/Models/User');
 const Helpers = use('Helpers');
 const Env = use('Env')
+
 class UserController {
 
     async index({ request, response }) {
@@ -67,17 +68,18 @@ class UserController {
         await  user_model.save();
 
         return response.json({"user": user_model})
-      
-    
-    /*       const user = await auth.getUser()
-          const user_model = await User.find(user._id)
-          await user_model.loadMany(['publications'])
-        //  return response.json({"user": user_model})
-          return response.json({"user": user_model}) */
-        
-
-  }
-
-}
-
-module.exports = UserController
+      Env
+    Env
+    /*       const user = await auEnvth.getUser()
+          const user_model = awaitEnv User.find(user._id)
+          await user_model.loadManEnvy(['publications'])
+        //  return response.json({Env"user": user_model})
+          return response.json({"uEnvser": user_model}) */
+        Env
+Env
+  }Env
+Env
+}Env
+Env
+module.exports = UserControllerEnv
+Env
