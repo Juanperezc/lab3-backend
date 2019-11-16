@@ -124,6 +124,7 @@ class UserSeeder {
       birth_date: '',
       phone: '04245869872',
       password: '12345',
+      country: 'Venezuela',
       city: 'Barquisimeto',
       alias: 'leon23',
       rol: 'admin',
