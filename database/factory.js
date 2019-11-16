@@ -26,6 +26,7 @@ Factory.blueprint('App/Models/User', async (faker) => {
       photo: faker_node.image.avatar(),
       birth_date: faker.birthday({string: true, american: false}),
       phone: faker.phone({ country: "us" }),
+      country: 'Venezuela',
       city: faker.city(),
       alias: faker.username(),
       rol: 'admin',
