@@ -18,27 +18,27 @@ class CategorySeeder {
     
     await Category.create({
       name: 'Alimentos',
-      status: 'A'
+      status: 'Active'
     });
 
     await Category.create({
       name: 'Ropa',
-      status: 'A'
+      status: 'Active'
     })
     
     await Category.create({
       name: 'Zapatos',
-      status: 'A'
+      status: 'Active'
     })
     
     await Category.create({
       name: 'Medicina',
-      status: 'A'
+      status: 'Active'
     })
     
     await Category.create({
       name: 'Auto partes',
-      status: 'A'
+      status: 'Active'
     })
   }
 }

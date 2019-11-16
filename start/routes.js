@@ -23,7 +23,7 @@ Route.get('/', () => {
 Route.get('/hola', () => {
   return { greeting: 'Hello' } })
 
-Route.resource('categorys', 'CategoryController')
+//Route.resource('categorys', 'CategoryController')
 
 
 Route
@@ -55,7 +55,7 @@ Route
     Route.resource('publications', 'PublicationController')
 
     //* CategoryRoutes
-    //Route.resource('categorys', 'CategoryController')
+    Route.resource('categorys', 'CategoryController').middleware(['auth'])
 
   
   })
