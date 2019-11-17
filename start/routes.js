@@ -50,6 +50,8 @@ Route
     .post('user/upload_photo', 'UserController.upload_photo').as('user.upload_photo')
     .middleware('auth')
 
+    Route.get('users/list', 'UserController.list').middleware('auth').as('users.list')
+
 
     //* PublicationRoutes
     Route.resource('publications', 'PublicationController')

@@ -9,7 +9,7 @@ class UserController {
         let users = await User.query().with('publications').fetch()
         return response.json({"users": users})
     }
-        async show({ request, response }) {
+    async show({ request, response }) {
         let users = await User.query().with('publications').fetch()
         return response.json({"users": users})
     }
@@ -77,6 +77,12 @@ class UserController {
           return response.json({"uEnvser": user_model}) */
         
 
+  }
+
+  async list({request, response}){
+    const users = await User.all();
+    
+    return response.json({"users": users})
   }
 
 }
