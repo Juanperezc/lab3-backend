@@ -11,7 +11,7 @@ class User extends Model {
     return ['password']
   }
   static get visible () {
-    return ['_id', 'email','full_name','photo','birth_date','phone','city','alias','rol', 'followers', 'following']
+    return ['_id', 'email','full_name','photo','birth_date','phone','city','country','alias','rol', 'followers', 'following']
   }
   static boot () {
     super.boot()
@@ -45,7 +45,7 @@ class User extends Model {
  //  return this.hasMany('App/Model/Publication', '_id', 'user_id')
    // return this.hasMany('App/Model/Publication')
   }
-  
+
 }
 
 module.exports = User

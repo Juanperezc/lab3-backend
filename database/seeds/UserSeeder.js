@@ -22,7 +22,7 @@ class UserSeeder {
       email: 'juanl1996@hotmail.com',
       full_name: 'Juan Perez',
       photo: faker_node.image.avatar(),
-      birth_date: '',
+      birth_date: moment().toDate(),
       phone: '04245869872',
       password: '2514182657',
       country: 'Venezuela',
@@ -64,14 +64,19 @@ class UserSeeder {
       }]
     });
 
-    const publications_juan = await Factory.model('App/Models/Publication').makeMany(5)
+    const publications_juan = await Factory.model('App/Models/Publication').createMany(5)
+    const ids_publications_juan=  publications_juan.map(a => a._id);
+    await Factory.model('App/Models/Commentary').createMany(5, { 
+      user_id : user_juan._id,
+      publications_id : ids_publications_juan});
+
     await user_juan.publications().saveMany(publications_juan)
 
     const user_marco = await User.create({
       email: 'test@test.com',
       full_name: 'Marco Saenz',
       photo: faker_node.image.avatar(),
-      birth_date: null,
+      birth_date: moment().toDate(),
       phone: '04245774672',
       password: '1234567890',
       country: 'Venezuela',
@@ -121,7 +126,7 @@ class UserSeeder {
       email: 'leon@test.com',
       full_name: 'Luis Leon',
       photo: faker_node.image.avatar(),
-      birth_date: '',
+      birth_date: moment().toDate(),
       phone: '04245869872',
       password: '12345',
       country: 'Venezuela',
@@ -152,9 +157,15 @@ class UserSeeder {
       }]
     });
 
-    const publications_leon = await Factory.model('App/Models/Publication').makeMany(5)
+    const publications_leon = await Factory.model('App/Models/Publication').createMany(5)
+    const ids_publications_leon =  publications_leon.map(a => a._id);
+    console.log(ids_publications_leon);
+    const commentaries_random = await Factory.model('App/Models/Commentary').createMany(5, { 
+      user_id : user_leon._id,
+      publications_id : ids_publications_leon});
+     /* await publications_leon.commentaries().saveMany(commentaries_random);   */
+/*     console.log(publications_leon.commentaries()) */
     await user_leon.publications().saveMany(publications_leon)
-
     const user = await Factory
     .model('App/Models/User')
     .createMany(10)

@@ -41,23 +41,29 @@ Route
       ['users.update', 'UpdateUser']
     ]))
     .apiOnly().only(['index', 'show', 'update']).middleware(['auth'])
-   
+
     Route
     .get('user/me', 'UserController.me').as('user.me')
     .middleware('auth')
-    
+
     Route
     .post('user/upload_photo', 'UserController.upload_photo').as('user.upload_photo')
     .middleware('auth')
 
 
     //* PublicationRoutes
-    Route.resource('publications', 'PublicationController')
+    Route.resource('publications', 'PublicationController').middleware('auth')
+
+    //* CommentaryRoutes
+    Route.resource('commentaries', 'CommentaryController')
+    .validator(new Map([
+      ['commentaries.store', 'StoreCommentary']
+    ]))
+    .apiOnly().only(['index','store', 'show', 'update']).middleware(['auth'])
 
     //* CategoryRoutes
     //Route.resource('categorys', 'CategoryController')
 
-  
   })
   .prefix('api')
 
