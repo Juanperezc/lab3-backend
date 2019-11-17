@@ -24,8 +24,9 @@ Factory.blueprint('App/Models/User', async (faker) => {
       full_name: faker.name(),
       password: faker.password(),
       photo: faker_node.image.avatar(),
-      birth_date: faker.birthday({string: true, american: false}),
+      birth_date: moment().toDate(),/* , faker.birthday({string: true, american: false}) */
       phone: faker.phone({ country: "us" }),
+      country: 'Venezuela',
       city: faker.city(),
       alias: faker.username(),
       rol: 'admin',
@@ -39,15 +40,30 @@ Factory.blueprint('App/Models/User', async (faker) => {
   Factory.blueprint('App/Models/Publication', (faker) => {
     return {
       type: 'multimedia/post',
+      parent_id: null,
       title: faker.sentence(),
       body: faker.paragraph(),
       photo : faker_node.image.business(640, 480,true),/*  */
       category: 'sports',
-      commentaries: [
-      ],
+    /*   commentaries: [
+      ], */
       likes:[
       ],
       created_at : moment().toDate(),
       updated_at: moment().toDate(),
     }
   })
+
+  Factory.blueprint('App/Models/Commentary', (faker, i ,data) => {
+    return {
+      body: faker.sentence(),
+      user_id : (data.user_id) && data.user_id || null,
+      publication_id:  (data.publications_id) && data.publications_id[i] || null,
+      parent_id: null,
+      likes:[
+      ],
+      created_at : moment().toDate(),
+      updated_at: moment().toDate(),
+    }
+
+  });
