@@ -36,7 +36,6 @@ Factory.blueprint('App/Models/User', async (faker) => {
       following: []
     }
   })
-
   Factory.blueprint('App/Models/Publication', (faker) => {
     return {
       type: 'multimedia/post',
@@ -45,25 +44,35 @@ Factory.blueprint('App/Models/User', async (faker) => {
       body: faker.paragraph(),
       photo : faker_node.image.business(640, 480,true),/*  */
       category: 'sports',
-    /*   commentaries: [
-      ], */
-      likes:[
-      ],
+    
       created_at : moment().toDate(),
       updated_at: moment().toDate(),
     }
   })
-
+  Factory.blueprint('App/Models/PublicationLike', (faker, i ,data) => {
+    return {
+      user_id : (data.user_id) && data.user_id || null,
+      commentary_id:  (data.commentary_id) && data.commentary_id || null,
+      created_at : moment().toDate(),
+      updated_at: moment().toDate(),
+    }
+  });
   Factory.blueprint('App/Models/Commentary', (faker, i ,data) => {
     return {
       body: faker.sentence(),
       user_id : (data.user_id) && data.user_id || null,
       publication_id:  (data.publications_id) && data.publications_id[i] || null,
       parent_id: null,
-      likes:[
-      ],
       created_at : moment().toDate(),
       updated_at: moment().toDate(),
     }
 
+  });
+  Factory.blueprint('App/Models/CommentaryLike', (faker, i ,data) => {
+    return {
+      user_id : (data.user_id) && data.user_id || null,
+      commentary_id:  (data.commentary_id) && data.commentary_id || null,
+      created_at : moment().toDate(),
+      updated_at: moment().toDate(),
+    }
   });

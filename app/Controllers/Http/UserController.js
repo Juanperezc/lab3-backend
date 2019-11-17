@@ -6,21 +6,11 @@ const Env = use('Env')
 class UserController {
 
     async index({ request, response }) {
-        let users = await User.query().with('publications.parentSS').fetch()
+        let users = await User.query().with('publications.parent').fetch()
         return response.json({"users": users})
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
     async show({ request, response }) {
-        let users = await User.query().with('publications').fetch()
-=======
-        async show({ request, response }) {
         let users = await User.query().with('publications.parent').fetch()
->>>>>>> f5a32fe733bee3fb74932da96747d8dd4b0d2882
-=======
-        async show({ request, response }) {
-        let users = await User.query().with('publications.parent').fetch()
->>>>>>> f5a32fe733bee3fb74932da96747d8dd4b0d2882
         return response.json({"users": users})
     }
 
@@ -29,7 +19,6 @@ class UserController {
             const user = await auth.getUser()
             const user_model = await User.find(user._id)
             await user_model.loadMany({'publications.parent.author': null, 'publications.author': null})
-          //  return response.json({"user": user_model})
             return response.json({"user": user_model})
           } catch (error) {
             return response.status(500).json({error: error})

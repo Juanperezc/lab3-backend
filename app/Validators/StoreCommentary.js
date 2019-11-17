@@ -9,11 +9,9 @@ class StoreCommentary {
     return true
   }
   get rules () {
-
     return {
-      publication_id: 'required|unique:publications,id',
+      publication_id: 'required|publicationExists:publications,id',
       body: 'required',
-    
     }
   }
 }

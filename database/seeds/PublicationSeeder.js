@@ -29,25 +29,14 @@ class PublicationSeeder {
     parent_id: null,
     photo : faker_node.image.business(640, 480,true),
     category: 'sports',
-   /*  commentaries: [
-      {
-        body: '100 verdes',
-        likes:[{
-          user_alias: 'juanperezc',
-          created_at : moment().toDate(),
-          updated_at: moment().toDate(),
-        }],
-        created_at : moment().toDate(),
-        updated_at: moment().toDate(),
-      }
-    ], */
-    likes:[
+   
+/*     likes:[
       {
         user_alias: 'juanperezc',
         created_at : moment().toDate(),
         updated_at: moment().toDate(),
       }
-    ],
+    ], */
     created_at : moment().toDate(),
     updated_at: moment().toDate()});
   await Publication.create({
@@ -57,9 +46,6 @@ class PublicationSeeder {
     body: null,
     category: null,
     parent_id: publication._id,
-
-    likes:[
-    ],
     created_at : moment().toDate(),
     updated_at: moment().toDate()}); 
     
