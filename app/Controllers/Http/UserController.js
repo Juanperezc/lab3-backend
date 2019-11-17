@@ -10,8 +10,13 @@ class UserController {
         return response.json({"users": users})
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     async show({ request, response }) {
         let users = await User.query().with('publications').fetch()
+=======
+        async show({ request, response }) {
+        let users = await User.query().with('publications.parent').fetch()
+>>>>>>> f5a32fe733bee3fb74932da96747d8dd4b0d2882
 =======
         async show({ request, response }) {
         let users = await User.query().with('publications.parent').fetch()
