@@ -27,13 +27,14 @@ class CustomValidationProvider extends ServiceProvider {
     const Validator = use('Validator');
     // Register
     Validator.extend('publicationExists', this._publicationExists, 'Publicación existente');
+    Validator.extend('commentaryExists', this._commentaryExists, 'Comentario existente');
     //
   }
 
   /*
   * Validate if mongo exist
   *
-  * @usage personExists
+  * @usage Publication
   */
  async _publicationExists(data, field, message, args, get) {
    // Same as data[ field ].
@@ -47,6 +48,27 @@ class CustomValidationProvider extends ServiceProvider {
      throw 'row not found!';
    }
  }
+
+
+  /*
+  * Validate if mongo exist
+  *
+  * @usage Commentary
+  */
+ async _commentaryExists(data, field, message, args, get) {
+  // Same as data[ field ].
+  const value = get(data, field)
+/*    const personId = get(data, field); */
+  // Get info from DB
+
+  const row = await use('App/Models/Commentary').find(value);
+  // If this person doesn't exists
+  if (!row) {
+    throw 'row not found!';
+  }
 }
+
+}
+
 
 module.exports = CustomValidationProvider

@@ -52,9 +52,12 @@ Route
 
     Route.get('users/list', 'UserController.list').middleware('auth').as('users.list')
 
-
     //* PublicationRoutes
     Route.resource('publications', 'PublicationController').middleware('auth')
+
+    Route.post('publication/like', 'PublicationController.like').as('publication.like').validator('PublicationExists')
+
+    Route.post('publication/share', 'PublicationController.share').as('publication.share').validator('PublicationExists')
 
     //* CommentaryRoutes
     Route.resource('commentaries', 'CommentaryController')
@@ -63,6 +66,9 @@ Route
     ]))
     .apiOnly().only(['index','store', 'show', 'update']).middleware(['auth'])
 
+    Route.post('commentary/like', 'CommentaryController.like').as('commentary.like').validator('CommentaryLike')
+  
+  
     //* CategoryRoutes
     Route.resource('categorys', 'CategoryController').middleware(['auth'])
 

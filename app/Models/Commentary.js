@@ -15,6 +15,9 @@ class Commentary extends Model {
     parent() {
         return this.belongsTo('App/Models/Publication', 'publication_id', '_id')
     }
+    likes() {
+        return this.hasMany('App/Models/CommentaryLike', '_id', 'commentary_id')
+    }
 }
 
 module.exports = Commentary

@@ -44,7 +44,6 @@ Factory.blueprint('App/Models/User', async (faker) => {
       body: faker.paragraph(),
       photo : faker_node.image.business(640, 480,true),/*  */
       category: 'sports',
-    
       created_at : moment().toDate(),
       updated_at: moment().toDate(),
     }
