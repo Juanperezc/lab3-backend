@@ -11,7 +11,7 @@ class User extends Model {
     return ['password']
   }
   static get visible () {
-    return ['_id', 'email','full_name','photo','birth_date','phone','city','country','alias','rol', 'followers', 'following']
+    return ['_id', 'email','full_name','photo','birth_date','phone','city','country','alias','rol', 'status','followers', 'following']
   }
   static boot () {
     super.boot()

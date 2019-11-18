@@ -28,7 +28,8 @@ class UserSeeder {
       country: 'Venezuela',
       city: 'Barquisimeto',
       alias: 'juanperezc',
-      rol: 'admin',
+      rol: 'Admin',
+      status: 'Active',
       threads: [
         {
           user_alias: 'marcosaenz',
@@ -82,7 +83,8 @@ class UserSeeder {
       country: 'Venezuela',
       city: 'Cabudare',
       alias: 'marcosaenz',
-      rol: 'admin',
+      rol: 'Admin',
+      status: 'Active',
       threads: [
         {
           user_alias: 'juanperezc',
@@ -132,7 +134,8 @@ class UserSeeder {
       country: 'Venezuela',
       city: 'Barquisimeto',
       alias: 'leon23',
-      rol: 'admin',
+      rol: 'Admin',
+      status: 'Active',
       threads: [
       ],
       notifications: [
@@ -166,9 +169,10 @@ class UserSeeder {
      /* await publications_leon.commentaries().saveMany(commentaries_random);   */
 /*     console.log(publications_leon.commentaries()) */
     await user_leon.publications().saveMany(publications_leon)
+    
     const user = await Factory
     .model('App/Models/User')
-    .createMany(10)
+    .createMany(50)
 
   }
 }
