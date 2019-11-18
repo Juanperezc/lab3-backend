@@ -21,6 +21,9 @@ class Publication extends Model {
     commentaries () {
       return this.hasMany('App/Models/Commentary', '_id', 'publication_id')
     }
+    likes() {
+      return this.hasMany('App/Models/PublicationLike', '_id', 'publication_id')
+    }
 }
 
 module.exports = Publication

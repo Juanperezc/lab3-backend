@@ -21,7 +21,7 @@ class PublicationSeeder {
     //* shared_id es un campo que puede o no existir
     const user_juan = await User.findBy('alias', 'juanperezc')
     const user_marco = await User.findBy('alias', 'marcosaenz')
-    const publication = await Publication.create({ 
+    const publication = await Publication.create({
     user_id: user_marco._id,
     type: 'multimedia/post',
     title: faker_node.lorem.sentence(),
@@ -29,37 +29,15 @@ class PublicationSeeder {
     parent_id: null,
     photo : faker_node.image.business(640, 480,true),
     category: 'sports',
-   /*  commentaries: [
-      {
-        body: '100 verdes',
-        likes:[{
-          user_alias: 'juanperezc',
-          created_at : moment().toDate(),
-          updated_at: moment().toDate(),
-        }],
-        created_at : moment().toDate(),
-        updated_at: moment().toDate(),
-      }
-    ], */
-    likes:[
-      {
-        user_alias: 'juanperezc',
-        created_at : moment().toDate(),
-        updated_at: moment().toDate(),
-      }
-    ],
     created_at : moment().toDate(),
     updated_at: moment().toDate()});
-  await Publication.create({
+    await Publication.create({
     user_id: user_juan._id,
     type: 'multimedia/post',
     photo : null,
     body: null,
     category: null,
     parent_id: publication._id,
-
-    likes:[
-    ],
     created_at : moment().toDate(),
     updated_at: moment().toDate()}); 
     

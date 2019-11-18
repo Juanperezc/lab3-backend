@@ -1,6 +1,6 @@
 'use strict'
 
-class StoreCommentary {
+class CommentaryLike {
   async handle ({ request }, next) {
     request.request.headers['accept'] = 'application/json'
     await next()
@@ -10,10 +10,9 @@ class StoreCommentary {
   }
   get rules () {
     return {
-      publication_id: 'required|publicationExists:publications,id',
-      body: 'required',
+      commentary_id: 'required|commentaryExists:commentaries,id',
     }
   }
 }
 
-module.exports = StoreCommentary
+module.exports = CommentaryLike

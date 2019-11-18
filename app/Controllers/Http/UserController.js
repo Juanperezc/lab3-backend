@@ -11,7 +11,12 @@ class UserController {
     }
 
     async show({ request, response }) {
-        let users = await User.query().with('publications').fetch()
+
+        let users = await User.query().with('publications.parent').fetch()
+        return response.json({"users": users})
+    }
+    async show({ request, response }) {
+        let users = await User.query().with('publications.parent').fetch()
 
         return response.json({"users": users})
     }
@@ -21,7 +26,6 @@ class UserController {
             const user = await auth.getUser()
             const user_model = await User.find(user._id)
             await user_model.loadMany({'publications.parent.author': null, 'publications.author': null})
-          //  return response.json({"user": user_model})
             return response.json({"user": user_model})
           } catch (error) {
             return response.status(500).json({error: error})
@@ -71,29 +75,18 @@ class UserController {
         await  user_model.save();
 
         return response.json({"user": user_model})
-      
-    
-    /*       const user = await auEnvth.getUser()
-          const user_model = awaitEnv User.find(user._id)
-          await user_model.loadManEnvy(['publications'])
-        //  return response.json({Env"user": user_model})
-          return response.json({"uEnvser": user_model}) */
-        
 
   }
-//'user/list'
-  async list({request, response}){
-    
-    const users = await User.select([
-        '_id',
-         'full_name',
-         'photo',
-         'country',
-         'alias',
-         'rol',
-         'status']).fetch();
-    
-    return response.json({"users": users})
+
+  async banned({request, response, params}){
+      const id = params.id
+      const user = await User.find(id);
+
+      user.status = user.status === 'Active' ? 
+                    'Banned' : 'Active';
+      await user.save();
+
+      return response.json({"user" : user});
   }
 }
 
