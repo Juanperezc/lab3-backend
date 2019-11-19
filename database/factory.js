@@ -29,11 +29,7 @@ Factory.blueprint('App/Models/User', async (faker) => {
       country: 'Venezuela',
       city: faker.city(),
       alias: faker.username(),
-      rol: 'admin',
-      threads: [],
-      notifications: [],
-      followers: [],
-      following: []
+      rol: 'admin'
     }
   })
   Factory.blueprint('App/Models/Publication', (faker) => {

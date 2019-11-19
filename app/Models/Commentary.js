@@ -4,7 +4,7 @@
 const Model = use('Model')
 
 class Commentary extends Model {
-    static get objectIDs() { return ['_id'] } //def
+    static get objectIDs() { return ['_id','user_id', 'publication_id'] } //def
     static get hidden () 
     {
         return ['user_id', 'publication_id']

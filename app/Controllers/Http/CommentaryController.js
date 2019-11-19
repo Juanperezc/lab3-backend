@@ -17,7 +17,9 @@ class CommentaryController {
           created_at: moment().toDate(),
           updated_at: moment().toDate(),
         });
-        await commentary.loadMany({'author': (builder) => builder.select('full_name','photo')})
+        await commentary.loadMany({
+          'author': (builder) => builder.select('full_name','photo'),
+          'likes.author': (builder) => builder.select('full_name','photo')})
         return response.json({"commentary": commentary})
     }
 

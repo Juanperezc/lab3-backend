@@ -14,10 +14,11 @@ class StoreUser {
       email: 'required|email|unique:users,email',
       password: 'required',
       full_name: 'required',
+      country: 'required',
       alias: 'required|unique:users,alias',
-      date_birth: 'required',
-      city: 'required',
-      phone: 'required'
+      birth_date: 'required',
+      city: 'required'/* , */
+     /*  phone: 'required' */
     }
   }
 }

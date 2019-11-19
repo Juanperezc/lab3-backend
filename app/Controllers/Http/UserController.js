@@ -10,7 +10,22 @@ class UserController {
         return response.json({"users": users})
     }
     async show({ request, response }) {
-        let users = await User.query().with('publications.parent').fetch()
+        let users = await User.query()
+    .with('publications.parent.author',
+          (builder) => builder.select('full_name','photo')
+     )
+     .with('publications.author',
+          (builder) => builder.select('full_name','photo')
+     )
+     .with('publications.commentaries.author',
+          (builder) => builder.select('full_name','photo')
+     )
+     .with('publications.commentaries.likes.author',
+          (builder) => builder.select('full_name','photo')
+     )
+     .with('publications.likes.author',
+          (builder) => builder.select('full_name','photo')
+     ).fetch()
         return response.json({"users": users})
     }
 
@@ -18,7 +33,11 @@ class UserController {
         try {
             const user = await auth.getUser()
             const user_model = await User.find(user._id)
-            await user_model.loadMany({'publications.parent.author': null, 'publications.author': null})
+            await user_model.loadMany({
+             'publications.parent.author': (builder) => builder.select('full_name','photo'),
+             'publications.author': (builder) => builder.select('full_name','photo'),
+             'publications.commentaries.author' : (builder) => builder.select('full_name','photo'),
+             'publications.likes.author' : (builder) => builder.select('full_name','photo')})
             return response.json({"user": user_model})
           } catch (error) {
             return response.status(500).json({error: error})
@@ -46,11 +65,11 @@ class UserController {
   }
 
     async upload_photo({request,  auth, response }) {
-    //  new Date().getTime() + '.' profilePic.subtype
-        const profilePic = request.file('file', {
+       //  new Date().getTime() + '.' profilePic.subtype
+       const profilePic = request.file('file', {
           types: ['image'],
           size: '2mb'
-        })
+       })
        let photo_name =  profilePic.clientName;
         await profilePic.move(Helpers.publicPath
         ('uploads/profile'), {
@@ -67,14 +86,6 @@ class UserController {
         await  user_model.save();
 
         return response.json({"user": user_model})
-      
-    
-    /*       const user = await auEnvth.getUser()
-          const user_model = awaitEnv User.find(user._id)
-          await user_model.loadManEnvy(['publications'])
-        //  return response.json({Env"user": user_model})
-          return response.json({"uEnvser": user_model}) */
-        
 
   }
 
