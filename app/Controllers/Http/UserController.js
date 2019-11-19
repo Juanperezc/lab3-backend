@@ -6,6 +6,12 @@ const Env = use('Env')
 class UserController {
 
     async index({ request, response }) {
+        const users = await User.query().with('publications.parent').fetch()
+        return response.json({"users": users})
+    }
+
+    async show({ request, response }) {
+
         let users = await User.query().with('publications.parent').fetch()
         return response.json({"users": users})
     }
@@ -45,6 +51,7 @@ class UserController {
           }
 
     }
+
     async update({ params, request, auth, response }) {
       try {
           const user_id = params.id;
@@ -89,12 +96,16 @@ class UserController {
 
   }
 
-  async list({request, response}){
-    const users = await User.all();
-    
-    return response.json({"users": users})
-  }
+  async banned({request, response, params}){
+      const id = params.id
+      const user = await User.find(id);
 
+      user.status = user.status === 'Active' ? 
+                    'Banned' : 'Active';
+      await user.save();
+
+      return response.json({"user" : user});
+  }
 }
 
 module.exports = UserController

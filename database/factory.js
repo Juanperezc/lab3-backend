@@ -18,6 +18,21 @@ const gravatarUrl = require('gravatar-url');
 const coolImages = require("cool-images");
 var faker_node = require('faker');
 
+const getRol = (max, min)=>{
+   const x = parseInt(Math.random() * (max - min) + min);
+
+   return x > 1 ? "Member" : "Admin";
+}
+
+const getStatus = (max , min)=>{
+   const x = parseInt(Math.random() * (max - min) + min);
+
+   return x > 1 ? "Active" : "Banned";
+}
+
+
+
+
 Factory.blueprint('App/Models/User', async (faker) => {
     return {
       email: faker.email(),
@@ -26,10 +41,15 @@ Factory.blueprint('App/Models/User', async (faker) => {
       photo: faker_node.image.avatar(),
       birth_date: moment().toDate(),/* , faker.birthday({string: true, american: false}) */
       phone: faker.phone({ country: "us" }),
-      country: 'Venezuela',
+      country: faker_node.address.country(),
       city: faker.city(),
       alias: faker.username(),
-      rol: 'admin'
+      rol: getRol(8,1),
+      status: getStatus(12,1),
+      threads: [],
+      notifications: [],
+      followers: [],
+      following: []
     }
   })
   Factory.blueprint('App/Models/Publication', (faker) => {
