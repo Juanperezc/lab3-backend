@@ -15,6 +15,7 @@ class UserController {
         let users = await User.query().with('publications.parent').fetch()
         return response.json({"users": users})
     }
+
     async show({ request, response }) {
         let users = await User.query()
     .with('publications.parent.author',
@@ -32,6 +33,7 @@ class UserController {
      .with('publications.likes.author',
           (builder) => builder.select('full_name','photo')
      ).fetch()
+     
         return response.json({"users": users})
     }
 
@@ -105,6 +107,22 @@ class UserController {
       await user.save();
 
       return response.json({"user" : user});
+  }
+
+  async getUser({params, request, response}){
+      const id = params.id
+      const user = await User.find(id);
+      
+      try {   
+        await user.loadMany(['publications']) 
+      } 
+      catch (error) {
+       // return  Promise.reject(error)
+       console.log("error getuser backen")
+       return response.status(500).json({error: error})
+      }
+      
+    return response.json({"user" : user});
   }
 }
 
