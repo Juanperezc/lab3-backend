@@ -47,6 +47,11 @@ Route
     .middleware('auth')
 
     Route
+    .get('profile/:id', 'UserController.getUser').as('user.profile')
+    .middleware('auth')
+  
+
+    Route
     .post('user/upload_photo', 'UserController.upload_photo')
     .as('user.upload_photo')
     .middleware('auth')

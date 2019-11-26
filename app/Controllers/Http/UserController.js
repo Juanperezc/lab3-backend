@@ -13,11 +13,6 @@ class UserController {
         return response.json({"users": users})
     }
 
- /*    async show({ request, response }) {
-
-        let user = await User.find().query().with('publications.parent').fetch()
-        return response.json({"users": users})
-    } */
     async show({params, request, response }) {
      const user_id = params.id;
      let user = await User.find(user_id);
@@ -27,9 +22,7 @@ class UserController {
       'publications.commentaries.author': (builder) =>  builder.select('full_name','photo'),
       'publications.commentaries.likes.author' : (builder) => builder.select('full_name','photo'),
       'publications.likes.author' : (builder) => builder.select('full_name','photo')});
-
-  
-        return response.json({"user": user})
+       return response.json({"user": user})
     }
 
     async me({ auth, response }) {
@@ -44,7 +37,6 @@ class UserController {
             return response.json({"user": user_model})
           } catch (error) {
             return response.status(500).json({error: error})
-            /* response.status(500).json(error); */
           }
 
     }
@@ -102,6 +94,20 @@ class UserController {
       await user.save();
 
       return response.json({"user" : user});
+  }
+
+  async getUser({params, request, response}){
+      const id = params.id
+      const user = await User.find(id);
+      try {
+        await user.loadMany(['publications']) 
+      }
+      catch (error) {
+       // return  Promise.reject(error)
+       console.log("error getuser backen")
+       return response.status(500).json({error: error})
+      }
+    return response.json({"user" : user});
   }
 }
 
