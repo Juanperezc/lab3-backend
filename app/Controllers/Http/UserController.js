@@ -5,34 +5,31 @@ const Env = use('Env')
 
 class UserController {
 
-    async index({ request, response }) {
-        const users = await User.query().with('publications.parent').fetch()
+    async index({ request, auth, response }) {
+      const user = await auth.getUser()
+        const users = await User.query()
+        .with('publications.parent')
+        .where('_id').ne(user._id).fetch()
         return response.json({"users": users})
     }
 
-    async show({ request, response }) {
+ /*    async show({ request, response }) {
 
-        let users = await User.query().with('publications.parent').fetch()
+        let user = await User.find().query().with('publications.parent').fetch()
         return response.json({"users": users})
-    }
-    async show({ request, response }) {
-        let users = await User.query()
-    .with('publications.parent.author',
-          (builder) => builder.select('full_name','photo')
-     )
-     .with('publications.author',
-          (builder) => builder.select('full_name','photo')
-     )
-     .with('publications.commentaries.author',
-          (builder) => builder.select('full_name','photo')
-     )
-     .with('publications.commentaries.likes.author',
-          (builder) => builder.select('full_name','photo')
-     )
-     .with('publications.likes.author',
-          (builder) => builder.select('full_name','photo')
-     ).fetch()
-        return response.json({"users": users})
+    } */
+    async show({params, request, response }) {
+     const user_id = params.id;
+     let user = await User.find(user_id);
+     await user.loadMany({
+      'publications.parent.author': (builder) => builder.select('full_name','photo'),
+      'publications.author': (builder) => builder.select('full_name','photo'),
+      'publications.commentaries.author': (builder) =>  builder.select('full_name','photo'),
+      'publications.commentaries.likes.author' : (builder) => builder.select('full_name','photo'),
+      'publications.likes.author' : (builder) => builder.select('full_name','photo')});
+
+  
+        return response.json({"user": user})
     }
 
     async me({ auth, response }) {

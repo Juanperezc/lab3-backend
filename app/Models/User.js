@@ -15,7 +15,6 @@ class User extends Model {
   }
   static boot () {
     super.boot()
-
     /**
      * A hook to hash the user password before saving
      * it to the database.
@@ -40,6 +39,12 @@ class User extends Model {
   tokens () {
     return this.hasMany('App/Models/Token')
   }
+/*   followers() {
+    return this.belongsToMany('App/Models/Follow', 'follower_id', '_id')
+  }
+  following() {
+      return this.belongsToMany('App/Models/Follow', 'user_id', '_id')
+  } */
   publications () {
     return this.hasMany('App/Models/Publication', '_id', 'user_id')
  //  return this.hasMany('App/Model/Publication', '_id', 'user_id')

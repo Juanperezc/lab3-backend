@@ -107,7 +107,7 @@ class UserSeeder {
           updated_at: moment().toDate(),
         }
       ],
-      followers: [{
+     followers: [{
         user_alias: 'juanperezc',
         created_at: moment().toDate(),
         updated_at: moment().toDate(),
@@ -157,7 +157,7 @@ class UserSeeder {
         user_alias: 'marcosaenz',
         created_at: moment().toDate(),
         updated_at: moment().toDate(),
-      }]
+      }] 
     });
 
     const publications_leon = await Factory.model('App/Models/Publication').createMany(5)
@@ -173,7 +173,9 @@ class UserSeeder {
     const user = await Factory
     .model('App/Models/User')
     .createMany(50)
-
+ /*    await user_juan.followers().attach([user_leon._id, user_marco._id])
+    await user_marco.followers().attach([user_leon._id, user_juan._id])
+    await user_leon.followers().attach([user_juan._id, user_marco._id]) */
   }
 }
 module.exports = UserSeeder

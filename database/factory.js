@@ -91,3 +91,12 @@ Factory.blueprint('App/Models/User', async (faker) => {
       updated_at: moment().toDate(),
     }
   });
+
+  Factory.blueprint('App/Models/Follower', (faker, i ,data) => {
+    return {
+      user_id : (data.user_id) && data.user_id || null,
+      follower_id:  (data.follower_id) && data.follower_id || null,
+      created_at : moment().toDate(),
+      updated_at: moment().toDate(),
+    }
+  });
